@@ -215,15 +215,22 @@ lines_path   = str(ENRICHED_F) if use_enriched else str(POWERLINES_F)
 gdf_lines = load_gdf(lines_path) if (ENRICHED_F.exists() or POWERLINES_F.exists()) else None
 gdf_fac   = load_gdf(str(FACILITIES_F)) if FACILITIES_F.exists() else None
 
-# --- Custom Load for Trees (Google Drive Bypass) ---
+# --- Load Trees from Google Drive ---
 if TREES_F.exists():
     gdf_trees = load_gdf(str(TREES_F))
 else:
     try:
-        # This uses the TREES_URL you defined in the CONFIG section
-        gdf_trees = load_gdf(TREES_URL)
+        import requests, tempfile, os
+        response = requests.get(TREES_URL, stream=True)
+        with tempfile.NamedTemporaryFile(
+                delete=False, suffix=".geojson") as tmp:
+            for chunk in response.iter_content(chunk_size=8192):
+                tmp.write(chunk)
+            tmp_path = tmp.name
+        gdf_trees = load_gdf(tmp_path)
+        os.unlink(tmp_path)
     except Exception as e:
-        st.error(f"Failed to load tree data from Drive: {e}")
+        st.error(f"Failed to load tree data from Google Drive: {e}")
         gdf_trees = None
 
 # ── Post-load type fixes ───────────────────────────────────────────────────
@@ -1451,6 +1458,7 @@ cf1, cf2, cf3 = st.columns(3)
 cf1.caption("🌳 ArborGrid 2.0 | Phase 2")
 cf2.caption("📍 Vancouver, BC 🇨🇦")
 cf3.caption("⚡ Streamlit · Folium · GeoPandas · Shapely")
+
 
 
 
