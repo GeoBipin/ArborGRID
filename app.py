@@ -212,41 +212,9 @@ def line_style(feature):
 use_enriched = ENRICHED_F.exists()
 lines_path   = str(ENRICHED_F) if use_enriched else str(POWERLINES_F)
 
-gdf_lines = load_gdf(lines_path) if (ENRICHED_F.exists() or POWERLINES_F.exists()) else None
-gdf_fac   = load_gdf(str(FACILITIES_F)) if FACILITIES_F.exists() else None
-
-# --- Load Trees from Google Drive ---
-if TREES_F.exists():
-    gdf_trees = load_gdf(str(TREES_F))
-else:
-    try:
-        import gdown, tempfile, os
-        tmp_path = tempfile.mktemp(suffix=".geojson")
-        gdown.download(
-            id="1QDukXwI3Xgo-HVk-MCv22sXo2LnbtsDS",
-            output=tmp_path,
-            quiet=False,
-        )
-        gdf_trees = load_gdf(tmp_path)
-        os.unlink(tmp_path)
-    except Exception as e:
-        st.error(f"Failed to load tree data: {e}")
-        gdf_trees = None
-        
-        # Step 4 — write to temp file and read with geopandas
-        with tempfile.NamedTemporaryFile(
-                delete=False, suffix=".geojson") as tmp:
-            for chunk in response.iter_content(chunk_size=32768):
-                if chunk:
-                    tmp.write(chunk)
-            tmp_path = tmp.name
-        
-        gdf_trees = load_gdf(tmp_path)
-        os.unlink(tmp_path)
-
-    except Exception as e:
-        st.error(f"Failed to load tree data from Google Drive: {e}")
-        gdf_trees = None
+gdf_lines = load_gdf(lines_path)          if (ENRICHED_F.exists() or POWERLINES_F.exists()) else None
+gdf_fac   = load_gdf(str(FACILITIES_F))   if FACILITIES_F.exists() else None
+gdf_trees = load_gdf(str(TREES_F))        if TREES_F.exists()      else None
 
 # ── Post-load type fixes ───────────────────────────────────────────────────
 # GeoJSON stores booleans as 0/1 integers on re-read.
