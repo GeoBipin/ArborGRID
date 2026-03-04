@@ -1470,9 +1470,10 @@ else:
 # =============================================================================
 st.divider()
 cf1, cf2, cf3 = st.columns(3)
-cf1.caption("🌳 ArborGrid 2.0 | Phase 2")
+cf1.caption("🌳 ArborGRID | Phase 2")
 cf2.caption("📍 Vancouver, BC 🇨🇦")
 cf3.caption("⚡ Streamlit · Folium · GeoPandas · Shapely")
+
 
 
 
