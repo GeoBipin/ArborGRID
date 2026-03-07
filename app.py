@@ -323,7 +323,7 @@ phase_badge = (
 st.markdown(f"""
 <div style='padding:8px 0 20px 0;'>
     <h1 style='margin:0;font-size:2.4rem;font-weight:700;color:#ffffff;'>
-        🌳⚡ CanopyATLAS {phase_badge}
+        🌳⚡ CanopyGRID {phase_badge}
     </h1>
     <p style='margin:8px 0 0 0;color:#b0bbd0;font-size:1.1rem;'>
         Vancouver, BC &nbsp;·&nbsp; 15 Metre Tree Corridors &nbsp;·&nbsp;
@@ -1443,3 +1443,4 @@ cf1.caption("🌳 ArborGRID | Phase 2")
 cf2.caption("📍 Vancouver, BC 🇨🇦")
 
 cf3.caption("⚡ Streamlit · Folium · GeoPandas · Shapely")
+
