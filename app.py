@@ -1,5 +1,5 @@
 # =============================================================================
-# ArborGrid 2.0 | Phase 2 Dashboard
+# CanopyGRID | Phase 2 Dashboard
 # File: app.py
 # Run: & $PY -m streamlit run app.py
 #
@@ -93,7 +93,7 @@ DEFAULT_BASEMAP = "☀️ Light (CartoDB Positron)"
 # PAGE CONFIG & CSS
 # =============================================================================
 st.set_page_config(
-    page_title="ArborGRID",
+    page_title="CanopyGRID",
     page_icon="🌳",
     layout="wide",
     initial_sidebar_state="expanded",
@@ -243,9 +243,9 @@ has_height_alerts = (
 with st.sidebar:
     st.markdown("""
     <div style='text-align:center; padding:8px 0 16px 0;'>
-        <div style='font-size:2.4rem;'>🌳⚡</div>
+        <div style='font-size:2.4rem;'>🌳</div>
         <div style='font-size:1.6rem; font-weight:700; color:#ffffff;'>
-            ArborGRID
+            CanopyGRID
         </div>
         <div style='font-size:0.95rem; color:#b0bbd0; margin-top:4px;'>
             Urban Vegetation & Utility Risk Assessment
@@ -323,7 +323,7 @@ phase_badge = (
 st.markdown(f"""
 <div style='padding:8px 0 20px 0;'>
     <h1 style='margin:0;font-size:2.4rem;font-weight:700;color:#ffffff;'>
-        🌳⚡ ArborGRID {phase_badge}
+        🌳⚡ CanopyATLAS {phase_badge}
     </h1>
     <p style='margin:8px 0 0 0;color:#b0bbd0;font-size:1.1rem;'>
         Vancouver, BC &nbsp;·&nbsp; 15 Metre Tree Corridors &nbsp;·&nbsp;
@@ -1441,4 +1441,5 @@ st.divider()
 cf1, cf2, cf3 = st.columns(3)
 cf1.caption("🌳 ArborGRID | Phase 2")
 cf2.caption("📍 Vancouver, BC 🇨🇦")
+
 cf3.caption("⚡ Streamlit · Folium · GeoPandas · Shapely")
